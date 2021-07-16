@@ -1,0 +1,53 @@
+{
+	"apiVersion": 2,
+	"name": "x3p0/archives",
+	"title": "X3P0 Archives",
+	"category": "widgets",
+	"description": "Displays a site archives list, broken down by month.",
+        "keywords": [ "archives" ],
+	"textdomain": "x3p0-archives",
+        "icon": "",
+	"attributes" : {
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"order": {
+			"type": "string",
+			"default": "desc"
+		},
+		"year": {
+			"type": "string",
+			"default": ""
+		},
+		"month": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"anchor": true,
+		"align": true,
+		"html": false,
+		"__experimentalBorder": true,
+		"color": {
+			"gradients": true,
+			"link": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalTextTransform": true
+		}
+	},
+	"style": "x3p0-archives",
+	"editorStyle": "x3p0-archives-editor",
+	"editorScript": "x3p0-archives-editor"
+}

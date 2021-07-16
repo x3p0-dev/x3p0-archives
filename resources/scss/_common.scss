@@ -1,0 +1,37 @@
+
+.wp-block-x3p0-archives {
+	margin: var(
+		--x3p0-archives--margin,
+		2rem 0 0
+	);
+
+	&__heading {
+		&-link {}
+	}
+
+	&__list {
+		list-style: none;
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
+		text-indent: none;
+	}
+
+	&__post {
+		display: flex;
+		gap: var(
+			--x3p0-archives--gap,
+			1ch
+		);
+
+		&-day {
+			flex-basis: 2ch;
+		}
+
+		&-link {
+			word-break: break-all;
+		}
+	}
+
+}
