@@ -164,9 +164,10 @@ class Block {
 					// Add a heading with the month and year
 					// and link it to the monthly archive.
 					$archives .= sprintf(
-						'<h2 class="wp-block-x3p0-archives__heading">
-						<a class="wp-block-x3p0-archives__heading-link" href="%s">%s</a>
-						</h2>',
+						'<%1$s class="wp-block-x3p0-archives__heading">
+						<a class="wp-block-x3p0-archives__heading-link" href="%2$s">%3$s</a>
+						</%1$s>',
+						tag_escape( $attr['headingTag'] ?? 'h2' ),
 						esc_url( $month_link ),
 						esc_html( get_the_time( $format_month_year ) )
 					);

@@ -10,6 +10,13 @@
 	}
 
 	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: var(
+			--x3p0-archives--list-gap,
+			0.5rem
+		);
+
 		list-style: none;
 		padding-left: 0;
 		padding-right: 0;
@@ -21,9 +28,11 @@
 	&__post {
 		display: flex;
 		gap: var(
-			--x3p0-archives--gap,
+			--x3p0-archives--item-gap,
 			1ch
 		);
+
+		&.has-duplicate-day {}
 
 		&-day {
 			flex-basis: 2ch;
@@ -33,5 +42,4 @@
 			word-break: break-all;
 		}
 	}
-
 }

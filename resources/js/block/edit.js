@@ -76,7 +76,8 @@ export default function ArchivesEdit( {
 		postType,
 		month,
 		year,
-		order
+		order,
+		headingTag: HeadingTag = 'h2'
 	} = attributes;
 
 	const { latestPosts } = useSelect( ( select ) => {
@@ -209,6 +210,21 @@ export default function ArchivesEdit( {
 					] }
 				/>
 			) }
+			<SelectControl
+				label={ __( 'Heading HTML Element' ) }
+				options={ [
+					{ label: '<h1>', value: 'h1' },
+					{ label: '<h2>', value: 'h2' },
+					{ label: '<h3>', value: 'h3' },
+					{ label: '<h4>', value: 'h4' },
+					{ label: '<h5>', value: 'h5' },
+					{ label: '<h6>', value: 'h6' }
+				] }
+				value={ HeadingTag }
+				onChange={ ( value ) =>
+					setAttributes( { headingTag: value } )
+				}
+			/>
 			</PanelBody>
 		</InspectorControls>
 	);
@@ -269,7 +285,7 @@ export default function ArchivesEdit( {
 
 		return [ (
 			<>
-			<h2 className="wp-block-x3p0-archives__heading">
+			<HeadingTag className="wp-block-x3p0-archives__heading">
 				<a
 					href={
 						x3p0Archives.monthLink.replace(
@@ -282,7 +298,7 @@ export default function ArchivesEdit( {
 				>
 					{ month.date }
 				</a>
-			</h2>
+			</HeadingTag>
 			<ul className="wp-block-x3p0-archives__list">
 				{ month.posts.map( ( post, i ) => {
 					let daynum = date( 'd', post.date_gmt );

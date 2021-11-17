@@ -3,7 +3,7 @@
  * Plugin Name:       X3P0 - Archives
  * Plugin URI:        https://github.com/x3p0-dev/x3p0-archives
  * Description:       A site archives block for WordPress for listing posts by month.
- * Version:           1.0.0-beta-20210708
+ * Version:           1.0.0-beta-20211117
  * Requires at least: 5.8
  * Requires PHP:      7.0
  * Author:            Justin Tadlock
