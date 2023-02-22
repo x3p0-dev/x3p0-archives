@@ -6,6 +6,10 @@
 	"description": "Displays a site archives list, broken down by month.",
         "keywords": [ "archives" ],
 	"textdomain": "x3p0-archives",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
         "icon": "",
 	"attributes" : {
 		"postType": {
@@ -50,8 +54,5 @@
 			"__experimentalFontFamily": true,
 			"__experimentalTextTransform": true
 		}
-	},
-	"style": "x3p0-archives",
-	"editorStyle": "x3p0-archives-editor",
-	"editorScript": "x3p0-archives-editor"
+	}
 }

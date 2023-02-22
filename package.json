@@ -2,34 +2,29 @@
 	"name": "x3p0-archives",
 	"version": "1.0.0",
 	"description": "Archives block for WordPress.",
-	"author": "Justin Tadlock",
+	"author": "justintadlock",
 	"license": "GPL-2.0+",
 	"homepage": "https://github.com/x3p0-dev/x3p0-archives",
 	"scripts": {
-		"dev": "mix",
-		"watch": "mix watch",
-		"prod": "mix --production",
-		"export": "npx mix --mix-config=webpack.mix.export.js --production"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/x3p0-dev/x3p0-archives.git"
-	},
-	"bugs": {
-		"url": "https://github.com/x3p0-dev/x3p0-archives/issues"
+		"prod": "wp-scripts build --webpack-src-dir=./resources --output-path=public",
+		"watch": "wp-scripts start --webpack-src-dir=./resources --output-path=public",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.14.6",
-		"@babel/preset-react": "^7.14.5",
-		"cross-env": "^5.2.1",
-		"laravel-mix": "^6.0.25",
-		"postcss-preset-env": "^6.7.0",
-		"react": "^17.0.2",
-		"rimraf": "^3.0.2",
-		"sass": "^1.35.1",
-		"sass-loader": "^12.1.0"
+		"@wordpress/scripts": "^22.4.0"
 	},
 	"dependencies": {
+		"@wordpress/block-editor": "^8.5.1",
+		"@wordpress/blocks": "^11.5.1",
+		"@wordpress/components": "^19.8.0",
+		"@wordpress/compose": "^5.17.0",
+		"@wordpress/element": "^4.17.0",
+		"@wordpress/i18n": "^4.6.0",
+		"@wordpress/icons": "^8.2.0",
 		"classnames": "^2.3.1"
 	}
 }

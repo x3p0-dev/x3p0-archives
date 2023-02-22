@@ -2,21 +2,9 @@
 
 The code for the project is handled via its [GitHub Repository](https://github.com/x3p0-dev/x3p0-archives).  You can open tickets, create patches, and send pull requests there.
 
-## Pull requests
-
-Problem first.  Solution second.
-
-Pull requests should have a ticket open for discussion first.  I rarely accept pull requests that aren't for a specific issue for various reasons.  It's far better to post an issue and let me or the community provide feedback prior to creating a pull request.
-
-Please don't make pull requests against the `master` branch.  This is the latest, stable code.  You can make a pull request against one of the point branches or the `dev` (future release) branch.
-
 ## Coding standards
 
 In general, the project follows all WordPress [coding standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards).  There are instances where it doesn't, opting for personal choices of my own, but in terms of contributing, following the WordPress standards is best practice.
-
-## Script and style files
-
-When making patches or pull requests with changes to script or style files, only do so to the primary file.  Don't create patches for the minified (`.min`) versions of the files.  Those will be minified after a patch is merged into the code base.
 
 ## Language
 

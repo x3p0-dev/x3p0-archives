@@ -1,0 +1,29 @@
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./resources/scss/style.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+.wp-block-x3p0-archives {
+  margin: var(--x3p0-archives--margin, 2rem 0 0);
+}
+.wp-block-x3p0-archives__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--x3p0-archives--list-gap, 0.5rem);
+  list-style: none;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-indent: none;
+}
+.wp-block-x3p0-archives__post {
+  display: flex;
+  gap: var(--x3p0-archives--item-gap, 1ch);
+}
+.wp-block-x3p0-archives__post-day {
+  flex-basis: 2ch;
+}
+.wp-block-x3p0-archives__post-link {
+  word-break: break-all;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

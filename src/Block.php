@@ -5,80 +5,76 @@
  * Registers and renders the block type on the front end.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
- * @copyright Copyright (c) 2021, Justin Tadlock
+ * @copyright Copyright (c) 2023, Justin Tadlock
  * @link      https://github.com/x3p0-dev/x3p0-archives
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 
 namespace X3P0\Archives;
 
+use WP_Block;
 use WP_Query;
 
-/**
- * Handles the block type.
- *
- * @since  1.0.0
- * @access public
- */
-class Block {
-
+class Block
+{
 	/**
-	 * Path to the `block.json` file.
+	 * Stores the plugin path.
 	 *
-	 * @since  1.0.0
-	 * @access private
-	 * @var    string
+	 * @since 1.0.0
+ 	 * @todo  Move this to the constructor with PHP 8-only support.
 	 */
-	private $json_path = '';
+	protected string $path;
 
-	/**
-	 * Sets up object state.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  string  $json_path
-	 * @return void
-	 */
-	public function __construct( string $json_path ) {
-		$this->json_path = $json_path;
+        /**
+         * Sets up object state.
+         *
+         * @since 1.0.0
+         */
+        public function __construct( string $path )
+	{
+		$this->path = $path;
 	}
 
-	/**
-	 * Boots the class, running its actions/filters.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function boot() {
-		add_action( 'init', [ $this, 'register' ] );
+        /**
+         * Boots the component, running its actions/filters.
+         *
+         * @since 1.0.0
+         */
+        public function boot(): void
+        {
+		add_action( 'init',      [ $this, 'register' ] );
 		add_action( 'save_post', [ $this, 'deleteCache' ] );
+		add_action( 'save_post', [ $this, 'deleteTransients' ] );
 	}
 
 	/**
 	 * Registers the block with WordPress.
 	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
+	 * @since 1.0.0
 	 */
-	public function register() {
-
-		register_block_type( $this->json_path, [
+        public function register(): void
+        {
+		register_block_type( $this->path . '/public', [
 			'render_callback' => [ $this, 'render' ]
 		] );
+
+		wp_localize_script(
+			generate_block_asset_handle( 'x3p0/archives', 'editorScript' ),
+			'x3p0Archives',
+			[
+				'monthLink' => $this->getMonthLinkUrl(),
+			 	'years'     => $this->getPostYears()
+			]
+		);
 	}
 
 	/**
 	 * Registers assets with WordPress.
 	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  array  $attr
-	 * @param  string  $content
-	 * @return string
+	 * @since 1.0.0
 	 */
-	public function render( $attr, $content ) {
+        public function render( array $attr, string $content, WP_Block $block ): string
+	{
 
 		// Set up some default variables that need to be empty.
 		$archives = $current_year = $current_month = $current_day = '';
@@ -229,7 +225,56 @@ class Block {
 		return $archives;
 	}
 
-	public function deleteCache() {
+	public function deleteCache(): void
+	{
 		wp_cache_delete( 'x3p0_site_archives' );
+	}
+
+	public function deleteTransients(): void
+	{
+		delete_transient( 'x3p0_archives_post_years' );
+	}
+
+	private function getMonthLinkUrl(): string
+	{
+		global $wp_rewrite;
+
+		$monthlink = $wp_rewrite->get_month_permastruct();
+
+		if ( ! empty( $monthlink ) ) {
+			$monthlink = home_url( user_trailingslashit( $monthlink, 'month' ) );
+		} else {
+			$monthlink = home_url( '?m=%year%%monthnum%' );
+		}
+
+		return $monthlink;
+	}
+
+	private function getPostYears(): array
+	{
+		global $wpdb;
+
+		$transient = get_transient( 'x3p0_archives_post_years' );
+
+		if ( $transient ) {
+			return $transient;
+		}
+
+		$results = [];
+
+		$years = $wpdb->get_results(
+			"SELECT YEAR(post_date) FROM {$wpdb->posts} WHERE post_status = 'publish' GROUP BY YEAR(post_date) DESC",
+			ARRAY_N
+		);
+
+		if ( is_array( $years ) && 0 < count( $years ) ) {
+			foreach ( $years as $year ) {
+				$results[] = $year[0];
+			}
+		}
+
+		set_transient( 'x3p0_archives_post_years', $results, WEEK_IN_SECONDS );
+
+		return $results;
 	}
 }
